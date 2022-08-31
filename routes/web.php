@@ -28,3 +28,6 @@ Route::get('/company/{id}/{company}', [App\Http\Controllers\CompanyController::c
 //Company
 Route::get('/user/profile', [App\Http\Controllers\UserController::class, 'index'])->name('user.profile');
 Route::post('/user/profile/create', [App\Http\Controllers\UserController::class, 'update'])->name('user.profile.update');
+Route::post('/user/profile/coverletter', [App\Http\Controllers\UserController::class, 'coverletter'])->name('user.profile.coverletter');
+Route::post('/user/profile/resume', [App\Http\Controllers\UserController::class, 'resume'])->name('user.profile.resume');
+Route::post('/user/profile/avatar', [App\Http\Controllers\UserController::class, 'avatar'])->name('user.profile.avatar');

@@ -4,9 +4,9 @@
     <div class="container">
         <div class="col-md-12">
             <div class="company-profile">
-                <img src="{{ asset('assets/cover/ccover.png') }}" style="width: 100%" alt="">
+                <img src="{{ asset('assets/img/cover/ccover.png') }}" style="width: 100%" alt="">
                 <div class="company-desc">
-                    <img src="{{ asset('assets/avatar/man.jpg')}}" width="100" alt="">
+                    <img src="{{ asset('assets/img/avatar/man.jpg')}}" width="100" alt="">
                     <p>{{ $company->description }}</p>
                     <p>{{ $company->cname }}</p>
                     <p><strong>Slogan</strong> {{ $company->slogan }}</p>
@@ -30,7 +30,7 @@
                 @foreach ($company->jobs as $job)
                 <tr>
                     <td>
-                        <img src="{{ asset('assets/avatar/man.jpg')}}" width="80" alt="">
+                        <img src="{{ asset('assets/img/avatar/man.jpg')}}" width="80" alt="">
                     </td>
                     <td>Position: {{ $job->position }}
                         <div>

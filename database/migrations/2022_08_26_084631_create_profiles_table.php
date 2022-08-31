@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('cover_letter')->nullable();
             $table->string('resume')->nullable();
             $table->string('avatar')->nullable();
-            $table->string('number')->nullable();
             $table->timestamps();
         });
     }

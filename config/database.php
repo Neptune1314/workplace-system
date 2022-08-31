@@ -75,6 +75,7 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'schema' => 'workplace',
+            // 'schema'   => env('DB_PGSQL_SCHEMA','workplace'),
             'sslmode' => 'prefer',
         ],
 
