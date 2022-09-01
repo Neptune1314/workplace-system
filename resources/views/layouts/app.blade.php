@@ -41,22 +41,38 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Нэвтрэх') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Ажил хайгчаар бүртгүүлэх') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('employer.create') }}">{{ __('Ажил олгогчоор бүртгүүлэх') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    @if(Auth::user()->user_type === 'employer')
+                                        {{ Auth::user()->company->cname }}
+                                    @else
+                                         {{ Auth::user()->name }}
+                                    @endif
+                                    
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    
+                                        @if(Auth::user()->user_type === 'employer')
+                                        <a class="dropdown-item" href="{{ route('company.create') }}">
+                                        {{ __('Компани мэдээлэл') }} </a>
+                                        @else
+                                        @endif
+                                        
+                                   
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

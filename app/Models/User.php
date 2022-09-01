@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Profile;
+use App\Models\Company;
 
 class User extends Authenticatable
 {
@@ -45,8 +46,12 @@ class User extends Authenticatable
     ];
 
     // Хэрэглэгч болон profile хэсгийг холбосон
-
     public function profile(){
         return $this->hasOne(Profile::class);
+    }
+
+    // Хэрэглэгч болон company хэсгийг холбосон hasOne -> One to One
+    public function company(){
+        return $this->hasOne(Company::class);
     }
 }
