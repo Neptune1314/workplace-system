@@ -7,7 +7,7 @@
             @if (!empty(Auth::user()->profile->avatar)) {{--  --}}
                 <img src="{{ asset('upload/avatar')}}/{{ Auth::user()->profile->avatar}}" width="100" style="width: 100%" alt="">
             @else
-                <img src="{{asset('assets/img/avatar/serwman1.jpg')}}" width="100" style="100%" alt=""> 
+                <img src="{{asset('assets/img/avatar/serwman1.jpg')}}" width="100" style="width: 100%" alt=""> 
         @endif
             
 
@@ -50,7 +50,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Утасны дугаар</label>
-                            <input type="text" name="phone_number" placeholder="{{ auth()->user()->profile->phone_number}}" class="form-control" placeholder="">
+                            <input type="text" name="phone_number" placeholder="{{ auth()->user()->profile->phone_number}}" class="form-control"  placeholder="">
                             @if($errors->has('phone_number'))
                             <div class="error" style="color: red">
                                 {{ $errors->first('phone_number') }}</div>
@@ -96,7 +96,7 @@
                 <div class="card-header">Хэрэглэгчийн мэдээлэл</div>
                      <div class="card-body">
                       <p>Хэрэглэгчийн нэр: {{ auth()->user()->name}}</p>
-                      <p>Хэрэглэгчийн нэр: {{ auth()->user()->email}}</p>
+                      <p>Хэрэглэгчийн цахим шуудан: {{ auth()->user()->email}}</p>
                       <p>Хэрэглэгчийн хаяг: {{ auth()->user()->profile->address}}</p>
                       <p>Хүйс: {{ auth()->user()->profile->gender}}</p>
                       <p>Утасны дугаар: {{ auth()->user()->profile->phone_number}}</p>
@@ -179,5 +179,12 @@
     }
     .btn {
         margin-top: 1rem
+    }
+    a{
+        text-decoration: none !important;
+    }
+    a:hover{
+        text-decoration: underline !important;
+        color: #198754 !important;
     }
 </style>
