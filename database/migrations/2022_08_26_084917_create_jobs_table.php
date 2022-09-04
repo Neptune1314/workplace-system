@@ -18,16 +18,16 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('company_id');
             $table->string('category_id');
-            $table->string('title');
-            $table->string('slug');
-            $table->text('description');
-            $table->text('role');
-            $table->string('position');
-            $table->string('address');
-            $table->string('type');
-            $table->string('status');
-            $table->date('last_date');
-            $table->timestamps();
+            $table->string('title')->nullable();
+            $table->string('slug')->nullable();
+            $table->text('description')->nullable();
+            $table->text('role')->nullable();
+            $table->string('position')->nullable();
+            $table->string('address')->nullable();
+            $table->string('type')->nullable();
+            $table->string('status')->nullable();
+            $table->date('last_date')->nullable();
+            $table->timestamps()->nullable();
         });
     }
 

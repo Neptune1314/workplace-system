@@ -8,6 +8,9 @@ use Illuminate\Validation\Rules\File;
 
 class UserController extends Controller
 {
+
+    
+
     public function index()
     {
         return view('profile.index');
