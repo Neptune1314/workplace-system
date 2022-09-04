@@ -14,13 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\JobController::class, 'index'])->name('job.index');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //jobs
+Route::get('/', [App\Http\Controllers\JobController::class, 'index'])->name('job.index');
+Route::get('/jobs/create', [App\Http\Controllers\JobController::class, 'create'])->name('jobs.create');
+Route::post('/jobs/store', [App\Http\Controllers\JobController::class, 'store'])->name('jobs.store');
 Route::get('/jobs/{id}/{job}', [App\Http\Controllers\JobController::class, 'show'])->name('jobs.show');
+Route::get('/jobs/{id}/{job}/editmyjob', [App\Http\Controllers\JobController::class, 'edit'])->name('jobs.edit');
+Route::post('/jobs/{id}/editmyjob', [App\Http\Controllers\JobController::class, 'update'])->name('jobs.update');
+Route::get('/jobs/myjob', [App\Http\Controllers\JobController::class, 'myjob'])->name('myjob');
+
 
 //Company
 Route::get('/company/{id}/{company}', [App\Http\Controllers\CompanyController::class, 'index'])->name('company.index');

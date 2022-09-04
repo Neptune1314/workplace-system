@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\Company;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\JobPostRequest;
+use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('employer', ['except' => array('index', 'show')]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +35,9 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        // return $categories;
+        return view('jobs.create', compact('categories'));
     }
 
     /**
@@ -34,9 +46,28 @@ class JobController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JobPostRequest $request)
     {
-        //
+        // dd($request->all());
+        // return $request->all();
+        $user_id = Auth()->user()->id;
+        $company = Company::where('user_id', $user_id)->first();
+        $company_id = $company->id;
+        Job::create([
+            'user_id' => $user_id,
+            'company_id' => $company_id,
+            'category_id' => $request->category,
+            'title' => $request->title,
+            'slug' => Str::slug($request->title),
+            'description' => $request->description,
+            'role' => $request->role,
+            'address' => $request->address,
+            'type' => $request->type,
+            'position' => $request->position,
+            'status' => $request->status,
+            'last_date' => $request->last_date
+        ]);
+        return redirect()->back()->with('MessageJob', 'Ажлын байрны зарыг амжилттай хадгаллаа');
     }
 
     /**
@@ -51,15 +82,21 @@ class JobController extends Controller
         return view('jobs.show', compact('job'));
     }
 
+    public function myjob(){
+        $jobs = Job::where('user_id', auth()->user()->id)->get();
+        // return $jobs;
+        return view('jobs.showjobs', compact('jobs'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function edit(Job $job)
+    public function edit($id, Job $job)
     {
-        //
+        $categories = Category::all();
+        return view('jobs.edit', compact('job', 'categories'));
     }
 
     /**
@@ -69,10 +106,24 @@ class JobController extends Controller
      * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Job $job)
+    public function update($id, JobPostRequest $request, Job $job)
     {
-        //
+        $job = Job::findOrFail($id);
+        //dd($job);
+            $job->update([
+            $job->title = $request->title,
+            $job->slug = Str::slug($request->title),
+            $job->description = $request->description,
+            $job->role = $request->role,
+            $job->position = $request->position,
+            $job->address = $request->address,
+            $job->type = $request->type,
+            $job->status = $request->status,
+            $job->last_date = $request->last_date,
+        ]);
+        return redirect()->back()->with('MessageUpdateJob', 'Ажил олгогчын зүгээс зарласан ажлын байрны мэдээллийг амжилттай заслаа.');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -84,4 +135,4 @@ class JobController extends Controller
     {
         //
     }
-}
+};

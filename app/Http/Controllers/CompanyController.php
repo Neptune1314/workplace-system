@@ -9,6 +9,10 @@ use App\Models\User;
 
 class CompanyController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('employer', 'verified' ['except' => array('index', 'show', 'company')]);
+    // }
     /**
      * Display a listing of the resource.
      *

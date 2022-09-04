@@ -13,10 +13,22 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css" integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous"/>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script defer src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+    $( function() {
+    //   $( "#datepicker" ).datepicker(); Анхны утгыг бас ашиглаж болно.
+    $("#datepicker").datepicker({
+        dateFormat: 'yy-mm-dd'
+    }).val();
+    } );
+    </script>
 </head>
 <body>
     <div id="app">
@@ -71,7 +83,18 @@
                                         {{ __('Компани мэдээлэл') }} </a>
                                         @else
                                         @endif
-                                        
+
+                                        @if(Auth::user()->user_type === 'employer')
+                                        <a class="dropdown-item" href="{{ route('jobs.create') }}">
+                                        {{ __('Ажлын байр  үүсгэх') }} </a>
+                                        @else
+                                        @endif
+
+                                        @if(Auth::user()->user_type === 'employer')
+                                        <a class="dropdown-item" href="{{ route('myjob') }}">
+                                        {{ __('Ажлын байрны жагсаалт') }} </a>
+                                        @else
+                                        @endif
                                    
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
