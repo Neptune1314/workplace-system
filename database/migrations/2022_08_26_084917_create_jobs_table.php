@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('status')->nullable();
             $table->date('last_date')->nullable();
-            $table->timestamps()->nullable();
+            $table->timestamps();
         });
     }
 

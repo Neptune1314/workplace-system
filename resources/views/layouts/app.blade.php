@@ -95,6 +95,12 @@
                                         {{ __('Ажлын байрны жагсаалт') }} </a>
                                         @else
                                         @endif
+
+                                        @if(Auth::user()->user_type === 'employer')
+                                        <a class="dropdown-item" href="{{ route('applicants') }}">
+                                        {{ __('Хүсэлтүүд') }} </a>
+                                        @else
+                                        @endif
                                    
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

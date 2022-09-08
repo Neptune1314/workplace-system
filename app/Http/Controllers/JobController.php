@@ -15,7 +15,7 @@ class JobController extends Controller
 
     public function __construct()
     {
-        $this->middleware('employer', ['except' => array('index', 'show')]);
+        $this->middleware('employer', ['except' => array('index', 'show', 'apply')]);
     }
     /**
      * Display a listing of the resource.
@@ -134,5 +134,20 @@ class JobController extends Controller
     public function destroy(Job $job)
     {
         //
+    }
+    
+    public function apply(Request $request, $id)
+    {
+        $jobId = Job::findOrFail($id);
+        $jobId->users()->attach(Auth::user()->id);
+        return redirect()->back()->with('MessageApply', 'Ажилд орох хүсэлтийг хүлээн авлаа, Тун удахгүй хариу мэдэгдэх болно');
+    }
+    public function applicants()
+    {
+        // return Job::has('users')->get();
+        $applicants = Job::has('users')->where('user_id', auth()->user()->id)->get();
+        //dd($applicants);
+        // return $applicants;
+        return view('jobs.applicants', compact('applicants'));
     }
 };
