@@ -81,27 +81,27 @@
                                         @if(Auth::user()->user_type === 'employer')
                                         <a class="dropdown-item" href="{{ route('company.create') }}">
                                         {{ __('Компани мэдээлэл') }} </a>
-                                        @else
-                                        @endif
 
-                                        @if(Auth::user()->user_type === 'employer')
                                         <a class="dropdown-item" href="{{ route('jobs.create') }}">
                                         {{ __('Ажлын байр  үүсгэх') }} </a>
-                                        @else
-                                        @endif
 
-                                        @if(Auth::user()->user_type === 'employer')
                                         <a class="dropdown-item" href="{{ route('myjob') }}">
                                         {{ __('Ажлын байрны жагсаалт') }} </a>
+
+                                        <a class="dropdown-item" href="{{ route('applicants') }}">
+                                        {{ __('Ажилд орох хүсэлтүүд') }} </a>
                                         @else
+                                        <a class="dropdown-item" href="{{ route('user.profile') }}">
+                                            {{ __('Профайл шинэчлэх') }} </a>
+                                            
                                         @endif
 
-                                        @if(Auth::user()->user_type === 'employer')
-                                        <a class="dropdown-item" href="{{ route('applicants') }}">
-                                        {{ __('Хүсэлтүүд') }} </a>
+                                        {{-- @if(Auth::user()->user_type === 'simple_user')
+                                        <a class="dropdown-item" href="{{ route('user.profile') }}">
+                                            {{ __('Профайл шинэчлэх') }} </a>
                                         @else
-                                        @endif
-                                   
+                                        @endif    --}}
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

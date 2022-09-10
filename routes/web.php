@@ -15,25 +15,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth','verified'])->name('home');
 //jobs
 Route::get('/', [App\Http\Controllers\JobController::class, 'index'])->name('job.index');
-Route::get('/jobs/create', [App\Http\Controllers\JobController::class, 'create'])->name('jobs.create');
+Route::get('/jobs/create', [App\Http\Controllers\JobController::class, 'create'])->middleware(['auth', 'verified'])->name('jobs.create');
 Route::post('/jobs/store', [App\Http\Controllers\JobController::class, 'store'])->name('jobs.store');
-Route::get('/jobs/{id}/{job}', [App\Http\Controllers\JobController::class, 'show'])->name('jobs.show');
+Route::get('/jobs/{id}/{job}', [App\Http\Controllers\JobController::class, 'show'])->middleware(['auth', 'verified'])->name('jobs.show');
+
 Route::get('/jobs/{id}/{job}/editmyjob', [App\Http\Controllers\JobController::class, 'edit'])->name('jobs.edit');
 Route::post('/jobs/{id}/editmyjob', [App\Http\Controllers\JobController::class, 'update'])->name('jobs.update');
-Route::get('/jobs/myjob', [App\Http\Controllers\JobController::class, 'myjob'])->name('myjob');
+Route::get('/jobs/myjob', [App\Http\Controllers\JobController::class, 'myjob'])->middleware(['auth', 'verified'])->name('myjob');
 Route::get('/applications/{id}', [App\Http\Controllers\JobController::class, 'apply'])->name('apply');
-
-Route::get('/jobs/applicantions', [App\Http\Controllers\JobController::class, 'applicants'])->name('applicants');
+Route::get('/jobs/applicantions', [App\Http\Controllers\JobController::class, 'applicants'])->middleware(['auth', 'verified'])->name('applicants');
+Route::get('/jobs/alljobs', [App\Http\Controllers\JobController::class, 'alljobs'])->name('alljobs');
 
 
 //Company
 Route::get('/company/{id}/{company}', [App\Http\Controllers\CompanyController::class, 'index'])->name('company.index');
-Route::get('/company/create', [App\Http\Controllers\CompanyController::class, 'create'])->name('company.create');
+Route::get('/company/create', [App\Http\Controllers\CompanyController::class, 'create'])->middleware(['auth', 'verified'])->name('company.create');
+
 Route::post('company/update', [App\Http\Controllers\CompanyController::class, 'update'])->name('company.update');
 Route::post('company/coverphoto', [App\Http\Controllers\CompanyController::class, 'coverphoto'])->name('company.coverphoto');
 Route::post('company/logo', [App\Http\Controllers\CompanyController::class, 'logo'])->name('company.logo');
