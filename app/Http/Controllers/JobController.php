@@ -15,7 +15,8 @@ class JobController extends Controller
 
     public function __construct()
     {
-        $this->middleware('employer', ['except' => array('index', 'show', 'apply', 'alljobs')]);
+        $this->middleware('employer', ['except' => array('index', 'show', 'apply', 'alljobs', 'searchjob')]);
+        // $this->middleware(['employer', 'verified'],['except' => array('index', 'show', 'apply', 'alljobs', )]);
     }
     /**
      * Display a listing of the resource.
@@ -174,6 +175,16 @@ class JobController extends Controller
             $jobs = Job::paginate(8);
             return view('jobs.alljobs', compact('jobs'));
         }
+    }
+    public function searchjob(Request $request)
+    {
+        //хайлт
+        //dd($request);
+        $keyword = $request->keyword;
+        $jobs = Job::where('title', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('position', 'LIKE', '%' . $keyword . '%')
+            ->get();
+        return response()->json($jobs);
     }
     
 };

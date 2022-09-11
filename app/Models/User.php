@@ -3,13 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Job;
+use App\Models\Company;
+use App\Models\Profile;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Laravel\Sanctum\HasApiTokens;
-use App\Models\Profile;
-use App\Models\Company;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -58,5 +59,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function users()
     {
         return $this->belongsToMany(User::class)->withTimestamps();
+    }
+    public function favourite()
+    {
+        return $this->belongsToMany(Job::class, 'favourites', 'user_id', 'job_id')->withTimestamps();
     }
 }

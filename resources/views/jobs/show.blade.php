@@ -35,12 +35,15 @@
                 <br>
                 @if (Auth::check() && Auth::user()->user_type == 'simple_user')
 
-                @if (!$job->checkApplication()) {{-- job id худлаа байвал ажиллна  --}}
-                <form action="{{ route('apply', [$job->id]) }}">
-                    @csrf
-                    <button type="submit" class="btn btn-success" style="width: 100%">Ажилд орох хүсэлт илгээх</button>
-                </form>
-                @endif
+                    @if (!$job->checkApplication()) {{-- job id худлаа байвал ажиллна  --}}
+                        <apply-job-component jobid={{ $job->id }}></apply-job-component>
+                            {{--<form action="{{ route('apply', [$job->id]) }}">
+                                 @csrf
+                                 <button type="submit" class="btn btn-success" style="width: 100%">Ажилд орох хүсэлт илгээх</button>
+                                </form> --}}
+                    @endif
+
+                    <favourite-job-component jobid={{ $job->id }} :favourited={{ $job->checkSaved() ? 'true' : 'false' }}></favourite-job-component>
                 @endif  
                 @if (Session::has('MessageApply'))
                      <div class="alert alert-success">

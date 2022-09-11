@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
 
         // factory('App\Models\User', 20)->create();
         \App\Models\User::factory(10)->create();
+        
         \App\Models\Company::factory(10)->create();
         $categories = [
             'Технологи',

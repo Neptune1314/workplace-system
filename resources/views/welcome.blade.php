@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row">
        <h1>Ажлын байрны жагсаалт</h1>
+       <search-job-component></search-job-component>
        <table class="table">
         <thead>
             <th></th>
@@ -59,7 +60,7 @@
 
                 <div class="card-body">
                   <h5 class="card-title">{{ $company->cname }}</h5>
-                  <p class="card-text">{{ Str::limit($company->description, 75) }}</p>
+                  <p class="card-text">{{ Str::limit($company->description, 60) }}</p>
                   <a href="{{ route('company.index', [$company->id, $company->slug]) }}" class="btn btn-primary">Дэлгэрэнгүй мэдээлэл</a>
                 </div>
 
@@ -79,5 +80,12 @@
     }
     .card img{
         margin: 1rem 0rem 0rem 1rem;
+    }
+    .badge-success{
+        background: rgb(56, 156, 56);
+    }
+    .card-footer a{
+        color: rgb(0, 0, 0);
+        text-decoration: none;
     }
 </style>

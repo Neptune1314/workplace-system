@@ -93,6 +93,8 @@
                                         @else
                                         <a class="dropdown-item" href="{{ route('user.profile') }}">
                                             {{ __('Профайл шинэчлэх') }} </a>
+                                        <a class="dropdown-item" href="{{ route('home') }}">
+                                            {{ __('Ажлын байрны жагсаалт') }} </a>
                                             
                                         @endif
 

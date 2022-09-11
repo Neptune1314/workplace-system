@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('favourites', function (Blueprint $table) {
             $table->id();
+            $table->integer('job_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }

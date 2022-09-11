@@ -27,10 +27,16 @@ Route::get('/jobs/{id}/{job}', [App\Http\Controllers\JobController::class, 'show
 Route::get('/jobs/{id}/{job}/editmyjob', [App\Http\Controllers\JobController::class, 'edit'])->name('jobs.edit');
 Route::post('/jobs/{id}/editmyjob', [App\Http\Controllers\JobController::class, 'update'])->name('jobs.update');
 Route::get('/jobs/myjob', [App\Http\Controllers\JobController::class, 'myjob'])->middleware(['auth', 'verified'])->name('myjob');
-Route::get('/applications/{id}', [App\Http\Controllers\JobController::class, 'apply'])->name('apply');
+Route::post('/applications/{id}', [App\Http\Controllers\JobController::class, 'apply'])->name('apply');
 Route::get('/jobs/applicantions', [App\Http\Controllers\JobController::class, 'applicants'])->middleware(['auth', 'verified'])->name('applicants');
 Route::get('/jobs/alljobs', [App\Http\Controllers\JobController::class, 'alljobs'])->name('alljobs');
 
+//Таалагдсан ажлын байрыг тэмдэглэх.
+Route::post('/jobs/save/{id}', [App\Http\Controllers\FavouriteController::class, 'savejob'])->name('savejob');
+Route::post('/jobs/unsave/{id}', [App\Http\Controllers\FavouriteController::class, 'unsavejob'])->name('unsavejob');
+
+//Search
+Route::get('/jobs/search', [App\Http\Controllers\JobController::class, 'searchjob'])->name('searchjob');
 
 //Company
 Route::get('/company/{id}/{company}', [App\Http\Controllers\CompanyController::class, 'index'])->name('company.index');
