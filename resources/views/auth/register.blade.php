@@ -1,13 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Цахим ажлын байрны системд ажил хайгчаар бүртгүүлэх') }}</div>
-
-                <div class="card-body">
+    <div class="album text-muted">
+        <div class="container">
+            <div class="row">
+                <h3>Ажил хайгчаар бүртгүүлэх</h3>
+            </div>
+        </div>
+    </div>
+    <div class="site-section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8 mb-5">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -32,7 +36,6 @@
 
                             <div class="col-md-6">
                                 <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus>
-
                                 @error('dob')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -105,5 +108,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

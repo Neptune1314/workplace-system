@@ -18,6 +18,15 @@ const app = createApp({});
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
+import ApplyJobComponent from './components/ApplyJobComponent.vue';
+app.component('apply-job-component', ApplyJobComponent);
+
+import FavouriteJobComponent from './components/FavouriteJobComponent.vue';
+app.component('favourite-job-component', FavouriteJobComponent);
+
+import SearchJobComponent from './components/SearchJobComponent.vue';
+app.component('search-job-component', SearchJobComponent);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

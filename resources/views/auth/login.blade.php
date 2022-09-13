@@ -4,6 +4,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if (Session::has('MessageCompany'))
+            <div class="alert alert-success">
+                {{ Session::get('MessageCompany') }}                
+            </div>
+            @endif
+            
             <div class="card">
                 <div class="card-header">{{ __('Нэвтрэх хэсэг') }}</div>
 

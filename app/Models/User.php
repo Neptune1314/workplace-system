@@ -3,14 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Job;
+use App\Models\Company;
+use App\Models\Profile;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use App\Models\Profile;
-use App\Models\Company;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -53,5 +55,13 @@ class User extends Authenticatable
     // Хэрэглэгч болон company хэсгийг холбосон hasOne -> One to One
     public function company(){
         return $this->hasOne(Company::class);
+    }
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
+    public function favourite()
+    {
+        return $this->belongsToMany(Job::class, 'favourites', 'user_id', 'job_id')->withTimestamps();
     }
 }

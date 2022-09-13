@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 use App\Models\Company;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Job extends Model
 {
@@ -17,5 +19,22 @@ class Job extends Model
     }
     public function company(){
         return $this->belongsTo(Company::class);
+    }
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    public function checkApplication(){
+        return DB::table('job_user')->where('user_id', auth()->user()->id)->where('job_id', $this->id)->exists();
+    }
+
+    public function favourite()
+    {
+        return $this->belongsToMany(User::class, 'favourites', 'job_id', 'user_id')->withTimestamps();
+    }
+
+    public function checkSaved(){
+        return DB::table('favourites')->where('user_id', auth()->user()->id)->where('job_id', $this->id)->exists();
     }
 }

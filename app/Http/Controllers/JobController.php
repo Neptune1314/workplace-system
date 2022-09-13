@@ -15,7 +15,8 @@ class JobController extends Controller
 
     public function __construct()
     {
-        $this->middleware('employer', ['except' => array('index', 'show')]);
+        $this->middleware('employer', ['except' => array('index', 'show', 'apply', 'alljobs', 'searchjob')]);
+        // $this->middleware(['employer', 'verified'],['except' => array('index', 'show', 'apply', 'alljobs', )]);
     }
     /**
      * Display a listing of the resource.
@@ -24,8 +25,9 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::all();
-        return view('welcome', compact('jobs'));
+        $jobs = Job::latest()->limit(5)->where('status', 1)->get(); //Сүүлээсээ status 1 байх ажлын байрыг харуулах
+        $companies = Company::limit(8)->get();
+        return view('welcome', compact('jobs', 'companies'));
     }
 
     /**
@@ -135,4 +137,54 @@ class JobController extends Controller
     {
         //
     }
+    
+    public function apply(Request $request, $id)
+    {
+        $jobId = Job::findOrFail($id);
+        $jobId->users()->attach(Auth::user()->id);
+        return redirect()->back()->with('MessageApply', 'Ажилд орох хүсэлтийг хүлээн авлаа, Тун удахгүй хариу мэдэгдэх болно');
+    }
+    public function applicants()
+    {
+        // return Job::has('users')->get();
+        $applicants = Job::has('users')->where('user_id', auth()->user()->id)->get();
+        //dd($applicants);
+        // return $applicants;
+        return view('jobs.applicants', compact('applicants'));
+    }
+
+    public function alljobs(Request $request)
+    {
+        // dd($request->title);
+        $title = $request->title;
+        $type = $request->type;
+        $category = $request->category_id;
+        $address = $request->address;
+
+        // return $address;
+
+        if($title || $type || $category || $address) {
+            $jobs = Job::where('title', 'LIKE', '%' . $title . '%')
+            ->orWhere('type', $type)
+            ->orWhere('category_id', $category)
+            ->orWhere('address', $address)
+            ->paginate(1);
+            // dd($jobs);
+            return view('jobs.alljobs', compact('jobs'));
+        }else{
+            $jobs = Job::paginate(8);
+            return view('jobs.alljobs', compact('jobs'));
+        }
+    }
+    public function searchjob(Request $request)
+    {
+        //хайлт
+        //dd($request);
+        $keyword = $request->keyword;
+        $jobs = Job::where('title', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('position', 'LIKE', '%' . $keyword . '%')
+            ->get();
+        return response()->json($jobs);
+    }
+    
 };
