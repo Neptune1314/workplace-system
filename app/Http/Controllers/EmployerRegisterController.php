@@ -26,6 +26,6 @@ class EmployerRegisterController extends Controller
         ]);
         $user->sendEmailVerificationNotification();
 
-        return redirect()->to('login')->with('MessageCompany', 'Та цахим хаягаа шалгана уу? Таны бүртгүүлсэн хаягруу баталгаажуулах линк явуулсан байгаа.');
+        return redirect()->back('login')->with('MessageCompany', 'Та цахим хаягаа шалгана уу? Таны бүртгүүлсэн хаягруу баталгаажуулах линк явуулсан байгаа.');
     }
 }

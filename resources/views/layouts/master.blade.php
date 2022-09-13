@@ -16,19 +16,19 @@
     
     @yield('content')
 
-    {{-- @include('partialsjob.findjob')
+    {{-- @include('partialsjob.findjob') --}}
     
-    @include('partialsjob.categories')
+    {{-- @include('partialsjob.categories') --}}
 
-    @include('partialsjob.resentjob')
+    {{-- @include('partialsjob.resentjob') --}}
 
-    @include('partialsjob.testimonies')
+    {{-- @include('partialsjob.testimonies') --}}
 
     @include('partialsjob.yourdreamjob')
 
-    @include('partialsjob.whychoose')
+    {{-- @include('partialsjob.whychoose') --}}
 
-    @include('partialsjob.blog') --}}
+    {{-- @include('partialsjob.blog') --}}
     
     @include('partialsjob.footer')
 
