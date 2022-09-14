@@ -41,8 +41,8 @@
                               </li>
                           @endif
                       @else
-                          <li class="nav-item dropdown">
-                              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          <li class="has-children">
+                              <a id="navbarDropdown" class="nav-link dropdown-toggle">
                                   @if(Auth::user()->user_type === 'employer')
                                       {{ Auth::user()->company->cname }}
                                   @else
@@ -50,9 +50,7 @@
                                   @endif
                                   
                               </a>
-
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                  
+                                <ul class="dropdown arrow-top">
                                       @if(Auth::user()->user_type === 'employer')
                                       <a class="dropdown-item" href="{{ route('company.create') }}">
                                       {{ __('Компани мэдээлэл') }} </a>
@@ -88,10 +86,11 @@
                                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                       @csrf
                                   </form>
-                              </div>
+                                  </ul>
                           </li>
                       @endguest
-                    {{-- <li><a href="categories.html">For Candidates</a></li>
+                    {{-- <li>
+                      <a href="categories.html">For Candidates</a></li>
                     <li class="has-children">
                       <a href="category.html">For Employees</a>
                       <ul class="dropdown arrow-top">
@@ -107,7 +106,6 @@
                             <li><a href="#">Employeer Profile</a></li>
                           </ul>
                         </li>
-
                       </ul>
                     </li>
                     <li><a href="contact.html">Contact</a></li> --}}

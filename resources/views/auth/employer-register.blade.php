@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             @if (Session::has('MessageCompany'))
                 <div class="alert alert-success">
-                    {{ $request->session()->get('MessageCompany') }}
+                    {{ Session::get('MessageCompany') }}
                 </div>
             @endif
             <div class="col-md-8">

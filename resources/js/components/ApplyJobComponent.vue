@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mb-1">
         <form @submit="formSubmit">
             <button 
                 v-if="show" 
@@ -45,4 +45,7 @@ export default {
 </script>
 
 <style>
+    .mb-1{
+        margin-bottom: 1rem !important;
+    }
 </style>

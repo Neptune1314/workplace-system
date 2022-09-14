@@ -16,9 +16,9 @@
     
     @yield('content')
 
-    {{-- @include('partialsjob.findjob') --}}
+    @include('partialsjob.findjob')
     
-    {{-- @include('partialsjob.categories') --}}
+    @include('partialsjob.categories')
 
     {{-- @include('partialsjob.resentjob') --}}
 

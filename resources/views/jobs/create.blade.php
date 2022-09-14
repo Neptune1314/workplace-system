@@ -4,6 +4,11 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                @if (Session::has('MessageJob'))
+                     <div class="alert alert-success">
+                         {{ Session::get('MessageJob')}}
+                     </div>
+                 @endif
                 <div class="card">
                     <div class="card-header">Ажлын байр зарлах</div>
                     <div class="card-body">
@@ -56,7 +61,44 @@
                                         </span>
                                     @endif
                                 </div>
-                            
+                                
+                                <div class="form-group">
+                                    <input type="text" class="form-control {{ $errors->has('number_of_vacancy') ? ' is-invalid' : '' }}" name="number_of_vacancy" placeholder="Ажлын байрны зарлагдсан тоог оруулна уу?">
+                                    @if($errors->has('number_of_vacancy'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('number_of_vacancy') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control {{ $errors->has('experience') ? ' is-invalid' : '' }}" name="experience" placeholder="Ажилтанд тавигдах ажлын байрны туршлагын талаар мэдээлэл оруулна уу?">
+                                    @if($errors->has('experience'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('experience') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <select name="gender" class="form-control">
+                                        <option value=""><--- Хүйс сонгох ---></option>
+                                        <option value="male">Эрэгтэй</option>
+                                        <option value="female">Эмэгтэй</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <select name="salary" class="form-control">
+                                        <option value="тохиролцох боломжтой">Тохиролцоно</option>
+                                        <option value="500000-600000">500000-600000</option>
+                                        <option value="600000-700000">600000-700000</option>
+                                        <option value="700000-800000">700000-800000</option>
+                                        <option value="800000-900000">800000-900000</option>
+                                        <option value="900000-1000000">900000-1000000</option>
+                                    </select>
+                                </div>
+
                                 <div class="form-group">
                                     <select name="type" class="form-control">
                                             <option value="fulltime">Орон тооны ажилтан</option>
@@ -98,11 +140,7 @@
                                     <button type="submit" class="btn btn-primary">Ажлын байрны зар үүсгэх</button>
                                 </div>
                      </form>
-                     @if (Session::has('MessageJob'))
-                     <div class="alert alert-success">
-                         {{ Session::get('MessageJob')}}
-                     </div>
-                 @endif
+                     
                     </div>
                 </div>
             </div>

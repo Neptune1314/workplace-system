@@ -34,6 +34,10 @@ class JobFactory extends Factory
             'type' => 'fulltime',
             'status' => rand(0,1),
             'last_date' => fake()->dateTime(),
+            'number_of_vacancy' => rand(1, 10),
+            'experience' => rand(1, 10),
+            'gender' => fake()->randomElement(['male', 'famale']),
+            'salary' => rand(500000, 1000000),
         ];
     }
 }

@@ -67,7 +67,11 @@ class JobController extends Controller
             'type' => $request->type,
             'position' => $request->position,
             'status' => $request->status,
-            'last_date' => $request->last_date
+            'last_date' => $request->last_date,
+            'number_of_vacancy' => $request->number_of_vacancy,
+            'experience' => $request->experience,
+            'gender' => $request->last_date,
+            'salary' => $request->salary,
         ]);
         return redirect()->back()->with('MessageJob', 'Ажлын байрны зарыг амжилттай хадгаллаа');
     }
@@ -122,6 +126,10 @@ class JobController extends Controller
             $job->type = $request->type,
             $job->status = $request->status,
             $job->last_date = $request->last_date,
+            $job->number_of_vacancy = $request->number_of_vacancy,
+            $job->experience = $request->experience,
+            $job->gender = $request->gender,
+            $job->salary = $request->salary
         ]);
         return redirect()->back()->with('MessageUpdateJob', 'Ажил олгогчын зүгээс зарласан ажлын байрны мэдээллийг амжилттай заслаа.');
     }

@@ -14,7 +14,7 @@
   <script src="{{ asset('jobfinder/js/mediaelement-and-player.min.js') }}"></script>
 
   <script src="{{ asset('jobfinder/js/main.js') }}"></script>
-    
+  @vite(['resources/js/app.js'])
 
   <script>
       document.addEventListener('DOMContentLoaded', function() {
